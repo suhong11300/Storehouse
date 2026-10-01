@@ -1,0 +1,69 @@
+# 来源：https://raw.githubusercontent.com/DeepJH/fuck-sb-qzxy-ad/refs/heads/main/rule-sets/clash_block.yaml
+name: 广告域名拦截 · Egern
+description: 由 DeepJH 的 clash_block.yaml 转换，保留全部 21 条拒绝规则。
+author: DeepJH（原规则）；OpenAI Codex（格式转换）
+homepage: https://github.com/DeepJH/fuck-sb-qzxy-ad
+rules:
+- domain_keyword:
+    match: anythinktech
+    policy: REJECT
+- domain_keyword:
+    match: toutiao
+    policy: REJECT
+- domain_suffix:
+    match: umeng.com
+    policy: REJECT
+- domain_suffix:
+    match: umengcloud.com
+    policy: REJECT
+- domain_suffix:
+    match: yfanads.com
+    policy: REJECT
+- domain_suffix:
+    match: gdt.qq.com
+    policy: REJECT
+- domain_suffix:
+    match: netease.im
+    policy: REJECT
+- domain_suffix:
+    match: beizi.biz
+    policy: REJECT
+- domain_suffix:
+    match: zijieapi.com
+    policy: REJECT
+- domain_keyword:
+    match: yunxin
+    policy: REJECT
+- domain_suffix:
+    match: open.kuaishouzt.com
+    policy: REJECT
+- domain_suffix:
+    match: open.kwaizt.com
+    policy: REJECT
+- domain_suffix:
+    match: kskwai.com
+    policy: REJECT
+- domain_suffix:
+    match: webcast-open.douyin.com
+    policy: REJECT
+- domain_suffix:
+    match: lf-cdn-tos.bytescm.com
+    policy: REJECT
+- domain_suffix:
+    match: sdk.e.qq.com
+    policy: REJECT
+- domain_suffix:
+    match: sdktmp.hubcloud.com.cn
+    policy: REJECT
+- domain_suffix:
+    match: mdap.mpaas.cn-hangzhou.aliyuncs.com
+    policy: REJECT
+- domain_suffix:
+    match: sdkoptedge.chinanetcenter.com
+    policy: REJECT
+- domain_suffix:
+    match: pgdt.ugdtimg.com
+    policy: REJECT
+- domain_suffix:
+    match: mssdk.volces.com
+    policy: REJECT
