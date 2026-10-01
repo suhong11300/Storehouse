@@ -1,0 +1,55 @@
+# 原配置：网易邮箱大师净化[墨鱼版]，作者 @ddgksf2013
+# 原版本：V1.0.2，原更新时间：2025-05-25
+# Egern 格式转换：2026-10-01
+# 来源：https://raw.githubusercontent.com/ddgksf2013/Rewrite/refs/heads/master/AdBlock/NeteaseMailAds.conf
+name: "网易邮箱大师净化[墨鱼版] · Egern"
+description: "将墨鱼圈 X 配置的 7 条重写转换为 Egern Map Local 和原生 jq 响应重写。"
+author: "@ddgksf2013（原规则）；OpenAI Codex（格式转换）"
+homepage: "https://github.com/ddgksf2013/Rewrite"
+
+mitm:
+  hostnames:
+    includes:
+      - dashi.163.com
+      - appconf.mail.163.com
+      - mail.163.com
+
+map_locals:
+  # 任务推广：reject-dict → HTTP 200 + 空 JSON 对象
+  - match: '^https?:\/\/dashi\.163\.com\/task-center-api\/fapi\/task'
+    status_code: 200
+    headers:
+      Content-Type: application/json
+    body: '{}'
+  # 通用广告请求：reject-200 → HTTP 200 + 空响应体
+  - match: '^https?:\/\/appconf\.mail\.163\.com\/mmad\/master\/get\.do'
+    status_code: 200
+    body: ''
+  # 状态判断
+  - match: '^https?:\/\/appconf\.mail\.163\.com\/mailoperating\/mailmaster\/api\/operator\/get'
+    status_code: 200
+    headers:
+      Content-Type: application/json
+    body: '{}'
+  # 免费邮箱提醒
+  - match: '^https?:\/\/appconf\.mail\.163\.com\/mailmaster\/getRegConfig\.do'
+    status_code: 200
+    headers:
+      Content-Type: application/json
+    body: '{}'
+  # 浮 ICON 推广
+  - match: '^https?:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/config\/function\.do'
+    status_code: 200
+    headers:
+      Content-Type: application/json
+    body: '{}'
+
+body_rewrites:
+  # 我的页面简化：保留原 jq 表达式
+  - response_jq:
+      match: '^https?:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/.*conf\.do'
+      filter: '.data |= del(.masterLoginGuideList, .masterOperatorList, .functionOperatorInfoList, .memberOperator, .activityTabInfoList, .extList)'
+  # Userinfo：保留原 jq 表达式
+  - response_jq:
+      match: '^https?:\/\/mail\.163\.com\/fgw\/mailsrv-webrobot\/.*user\/info'
+      filter: '.result |= del(.assistantInfo, .quotaData)'
